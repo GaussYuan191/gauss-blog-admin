@@ -1,0 +1,28 @@
+{
+  "name": "gauss-blog-admin",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@types/loadable__component": "^5.13.4",
+    "@types/react-router-dom": "^5.3.3",
+    "antd": "^4.21.1",
+    "axios": "^0.27.2",
+    "echarts": "^5.3.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "5.2.0",
+    "sass": "^1.52.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^17.0.10",
+    "@vitejs/plugin-react": "^1.0.7",
+    "typescript": "^4.5.4",
+    "vite": "^2.8.0"
+  }
+}
