@@ -1,0 +1,31 @@
+#login {
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../common/images/login_center_bg_main.png");
+  background-position: center center;
+  overflow: hidden;
+  .content {
+    width: 360px;
+    padding: 5px;
+    margin: 0 auto;
+    margin-top: 280px;
+    position: relative;
+    background-color: #409eff;
+    border-radius: 5px;
+  }
+  .login-card {
+    width: 350px;
+    border-radius: 5px;
+    .login-form {
+      .login-form-button {
+        width: 150px;
+        position: relative;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+.ant-form-item-control-input-content {
+  display: flex;
+  justify-content: center;
+}
