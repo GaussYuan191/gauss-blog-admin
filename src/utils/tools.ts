@@ -1,3 +1,5 @@
+import { useLocation } from "react-router-dom";
+
 /** 判断是否已经登录 或者token 超时 */
 export const isLogin = (): boolean => {
   const localToken = getToken();
@@ -20,3 +22,7 @@ export const getToken = (): string => {
 export const setToken = (tokenInfo: object): void => {
   window.localStorage.setItem("token", JSON.stringify(tokenInfo));
 };
+/** 解析url参数 */
+export function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
