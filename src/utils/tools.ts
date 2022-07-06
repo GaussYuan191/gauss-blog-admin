@@ -1,13 +1,19 @@
-/** 判断是否已经登录 */
+/** 判断是否已经登录 或者token 超时 */
 export const isLogin = (): boolean => {
   const localToken = getToken();
-  console.log("本地读取的token", localToken);
+  if (localToken) {
+    const lifeTime =
+      JSON.parse(window.localStorage.getItem("token") || "").lifeTime * 1000;
+    const nowTime = new Date().getTime();
+    if (nowTime > lifeTime) return false;
+    else return true;
+  }
   return false;
 };
 
 /** 获取本地token */
 export const getToken = (): string => {
-  let tokenInfo = JSON.parse(window.localStorage.getItem("token") || "");
+  let tokenInfo = JSON.parse(window.localStorage.getItem("token") || "{}");
   return tokenInfo?.token || "";
 };
 /** 设置本地token */
