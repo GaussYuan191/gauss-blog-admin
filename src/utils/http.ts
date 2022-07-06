@@ -3,7 +3,7 @@ import { message, Modal } from "antd";
 import { API_ROOT } from "./config";
 import { isLogin, getToken } from "./tools";
 const LOGIN_PATH = "user/login";
-const confirm = Modal.config;
+const { confirm } = Modal;
 export const http = axios.create({
   baseURL: API_ROOT,
   timeout: 1000,
@@ -12,7 +12,7 @@ export const http = axios.create({
 /** 请求拦截器 */
 http.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    config.headers.Authorization = getToken() || "";
+    config.headers.Authorization = `Naice ${getToken()}` || "";
     return config;
   },
   (error) => {
@@ -24,16 +24,16 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   (response: AxiosResponse<any>): any | Promise<AxiosResponse<any>> => {
     console.log("请求返回", response);
-    if (response.config.url !== LOGIN_PATH) {
-      // confirm({
-      //   title: "提示!",
-      //   content: "用户信息已过期，请点击确定后重新登录。",
-      //   okText: "确定",
-      //   cancelText: "取消",
-      //   onOk() {
-      //     window.location.href = "/login";
-      //   },
-      // });
+    if (response.config.url !== LOGIN_PATH && !isLogin()) {
+      confirm({
+        title: "提示!",
+        content: "用户信息已过期，请点击确定后重新登录。",
+        okText: "确定",
+        cancelText: "取消",
+        onOk() {
+          window.location.href = "/login";
+        },
+      });
     }
     let { data } = response;
     if (data.code == 0) {
@@ -43,6 +43,17 @@ http.interceptors.response.use(
     }
   },
   (error: any) => {
+    if (!isLogin()) {
+      confirm({
+        title: "提示!",
+        content: "用户信息已过期，请点击确定后重新登录。",
+        okText: "确定",
+        cancelText: "取消",
+        onOk() {
+          window.location.href = "/login";
+        },
+      });
+    }
     console.log("请求失败", error);
     return Promise.reject(error);
   }
