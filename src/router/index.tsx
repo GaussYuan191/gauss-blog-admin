@@ -1,11 +1,19 @@
 import { Route } from "react-router-dom";
 import loadable from "@loadable/component";
-
+// 页面布局
 const Layout = loadable(() => import("../common/layout"));
+// 登录页面
 const Login = loadable(() => import("../pages/login"));
+// 主页面
 const Home = loadable(() => import("../pages/home"));
+// 文章列表
 const ArticleList = loadable(() => import("../pages/article-list"));
+// 文章新增
 const AddArticle = loadable(() => import("../pages/article-add"));
+// 标签列表
+const Tags = loadable(() => import("../pages/tags"))
+// 标签新增
+const TagAdd = loadable(() => import("../pages/tag-add"))
 /** 导出路由配置 */
 export const routes = [
   {
@@ -60,14 +68,14 @@ export const routes = [
       //   path: "/project",
       //   component: Projects,
       // },
-      // {
-      //   path: "/tags",
-      //   component: Tags,
-      // },
-      // {
-      //   path: "/tags-add",
-      //   component: TagAdd,
-      // },
+      {
+        path: "/tags",
+        component: Tags,
+      },
+      {
+        path: "/tags-add",
+        component: TagAdd,
+      },
       {
         path: "/",
         component: Home,
