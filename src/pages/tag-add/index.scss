@@ -1,0 +1,13 @@
+.addtag {
+  width: 500px;
+  margin: 30px auto 0 auto;
+  border: 1px solid #f1f1f1;
+  padding: 20px;
+  .btnbox {
+    display: flex;
+    justify-content: center;
+    .ant-btn {
+      width: 130px;
+    }
+  }
+}
