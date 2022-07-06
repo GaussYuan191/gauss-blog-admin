@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Button, message, Modal } from "antd";
 import { RouteComponentProps, useLocation } from "react-router-dom";
 import PageLayout from "../../common/components/page-layout";
@@ -6,8 +6,7 @@ import BaseInfo from "./base-info";
 import Edit from "./edit";
 import "./index.scss";
 import "./view-article.scss";
-import { mdArt } from "../../utils";
-
+import { addArticle, editeArt, getArtId, mdArt, useQuery } from "../../utils";
 export default function AddArticle(props: RouteComponentProps) {
   let myform: any = null;
   const viewArticleDom = useRef<any>(null);
@@ -16,6 +15,7 @@ export default function AddArticle(props: RouteComponentProps) {
   const [editContent, setEditContent] = useState(""); // 编辑文章
   const [title, setTitle] = useState("");
   const [visible, setVisible] = useState(false); // 文章预览
+  const query = useQuery();
 
   const submit = () => {
     myform.submit();
@@ -32,9 +32,22 @@ export default function AddArticle(props: RouteComponentProps) {
       add(article, tagIds);
     }
   };
-  const add = (article: any, tagIds: Array<string>) => {
+  const add = async (article: any, tagIds: Array<string>) => {
     let params = { ...article, ...acontent };
-
+    const { data } = await addArticle({
+      title: params.title,
+      keyword: params.keyword,
+      descript: params.descript,
+      tag: tagIds,
+      content: params.content,
+      editContent: "",
+      state: params.state,
+      publish: params.publish,
+    });
+    if (data.code) {
+      message.success(data.message);
+      props.history.push("/article");
+    }
     console.log("开始添加文章", params);
   };
   const saveFormRef = (formRef: any) => {
@@ -43,8 +56,31 @@ export default function AddArticle(props: RouteComponentProps) {
   const editChange = (c: string, e: string) => {
     setAcontent({ content: c, editContent: e });
   };
+  // 获取编辑数据
+  useEffect(() => {
+    (async () => {
+      const id = query.get("id");
+      if (id) {
+        const { data } = await getArtId(id);
+        if (data.code) {
+          setArticle(data.result);
+          setEditContent(data.result.content);
+          setTitle("编辑文章");
+          setAcontent({
+            content: data.result.content,
+            editContent: data.result.editContent,
+          });
+        }
+      } else {
+        setArticle({});
+        setEditContent("");
+        setTitle("添加文章");
+        setAcontent({ content: "", editContent: "" });
+      }
+    })();
+  }, [location]);
   return (
-    <PageLayout title="添加文章">
+    <PageLayout title={title}>
       <BaseInfo
         submit={getFormData}
         wrappedComponentRef={saveFormRef}
