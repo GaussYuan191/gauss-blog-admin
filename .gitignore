@@ -14,7 +14,7 @@ dist-ssr
 
 # lint
 .eslintcache
-
+.stylelintcache
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

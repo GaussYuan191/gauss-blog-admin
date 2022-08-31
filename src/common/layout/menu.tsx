@@ -1,8 +1,9 @@
 import { useUpdateEffect } from "ahooks";
 import { useState } from "react";
 import { Menu } from "antd";
-import { menuConfig, menuType } from "./menu-config";
-import { RouteProps, RouterProps } from "react-router-dom";
+import type { menuType } from "./menu-config";
+import { menuConfig } from "./menu-config";
+import type { RouteProps, RouterProps } from "react-router-dom";
 const { SubMenu } = Menu;
 
 interface menuProps {

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { Card, Col, Row } from 'antd';
 import PageLayout from '../../common/components/page-layout'
 const Home: FC = () => {

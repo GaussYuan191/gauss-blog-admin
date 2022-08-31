@@ -1,4 +1,4 @@
-import { RouterProps } from "react-router";
+import type { RouterProps } from "react-router";
 import Side from "./side";
 import Main from "./main";
 import "./layout.scss";
