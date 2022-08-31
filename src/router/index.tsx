@@ -1,35 +1,35 @@
-import { Route } from "react-router-dom";
-import loadable from "@loadable/component";
+import loadable from '@loadable/component';
+import { Route } from 'react-router-dom';
 // 页面布局
-const Layout = loadable(() => import("../common/layout"));
+const Layout = loadable(() => import('../common/layout'));
 // 登录页面
-const Login = loadable(() => import("../pages/login"));
+const Login = loadable(() => import('../pages/login'));
 // 主页面
-const Home = loadable(() => import("../pages/home"));
+const Home = loadable(() => import('../pages/home'));
 // 文章列表
-const ArticleList = loadable(() => import("../pages/article-list"));
+const ArticleList = loadable(() => import('../pages/article-list'));
 // 文章新增
-const AddArticle = loadable(() => import("../pages/article-add"));
+const AddArticle = loadable(() => import('../pages/article-add'));
 // 标签列表
-const Tags = loadable(() => import("../pages/tags"))
+const Tags = loadable(() => import('../pages/tags'));
 // 标签新增
-const TagAdd = loadable(() => import("../pages/tag-add"))
+const TagAdd = loadable(() => import('../pages/tag-add'));
 /** 导出路由配置 */
 export const routes = [
   {
-    path: "/login",
+    path: '/login',
     component: Login,
   },
   {
-    path: "/",
+    path: '/',
     component: Layout,
     children: [
       {
-        path: "/article",
+        path: '/article',
         component: ArticleList,
       },
       {
-        path: "/article-add",
+        path: '/article-add',
         component: AddArticle,
       },
       // {
@@ -69,15 +69,15 @@ export const routes = [
       //   component: Projects,
       // },
       {
-        path: "/tags",
+        path: '/tags',
         component: Tags,
       },
       {
-        path: "/tags-add",
+        path: '/tags-add',
         component: TagAdd,
       },
       {
-        path: "/",
+        path: '/',
         component: Home,
       },
     ],
@@ -86,9 +86,6 @@ export const routes = [
 /** 导出路由 */
 export function RouteWithSubRoutes(route: any) {
   return (
-    <Route
-      path={route.path}
-      render={(props) => <route.component {...props} {...route} />}
-    ></Route>
+    <Route path={route.path} render={(props) => <route.component {...props} {...route} />}></Route>
   );
 }

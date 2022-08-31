@@ -1,5 +1,5 @@
-import { FC } from "react";
-import HeaderTittle from "./header-title";
+import { FC } from 'react';
+import HeaderTittle from './header-title';
 
 interface TittleProps {
   title: string;

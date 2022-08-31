@@ -1,5 +1,5 @@
-import { BrowserRouter, Switch } from "react-router-dom";
-import { routes, RouteWithSubRoutes } from "./router";
+import { BrowserRouter, Switch } from 'react-router-dom';
+import { routes, RouteWithSubRoutes } from './router';
 function App() {
   return (
     <BrowserRouter>

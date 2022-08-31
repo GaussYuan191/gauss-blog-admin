@@ -1,9 +1,9 @@
-import { useUpdateEffect } from "ahooks";
-import { useState } from "react";
-import { Menu } from "antd";
-import type { menuType } from "./menu-config";
-import { menuConfig } from "./menu-config";
-import type { RouteProps, RouterProps } from "react-router-dom";
+import { useUpdateEffect } from 'ahooks';
+import { Menu } from 'antd';
+import { useState } from 'react';
+import type { RouteProps, RouterProps } from 'react-router-dom';
+import type { menuType } from './menu-config';
+import { menuConfig } from './menu-config';
 const { SubMenu } = Menu;
 
 interface menuProps {
@@ -11,7 +11,7 @@ interface menuProps {
 }
 
 export default function MenuMain(props: menuProps & RouteProps & RouterProps) {
-  const [openKey, setOpenKey] = useState([""]);
+  const [openKey, setOpenKey] = useState(['']);
   const click = (path?: string) => {
     if (path) {
       props.history.push(path);
@@ -22,7 +22,7 @@ export default function MenuMain(props: menuProps & RouteProps & RouterProps) {
   };
   useUpdateEffect(() => {
     if (props.location) {
-      const arr = props.location.pathname.substring(1).split("-");
+      const arr = props.location.pathname.substring(1).split('-');
       setOpenKey([arr[0]]);
     }
   }, [props.location]);
@@ -30,13 +30,7 @@ export default function MenuMain(props: menuProps & RouteProps & RouterProps) {
     <Menu mode="inline" theme="dark" defaultOpenKeys={openKey} className="menu">
       {menuConfig.map((menu: menuType) => {
         if (!menu.children) {
-          return (
-            <Menu.Item
-              key={menu.key}
-              icon={<menu.icon />}
-              onClick={() => click(menu.path)}
-            />
-          );
+          return <Menu.Item key={menu.key} icon={<menu.icon />} onClick={() => click(menu.path)} />;
         } else {
           return (
             <SubMenu

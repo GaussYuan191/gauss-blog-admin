@@ -1,7 +1,7 @@
-import type { RouterProps } from "react-router";
-import { Layout } from "antd";
-import MenuMain from "./menu";
-import { useBoolean } from "ahooks";
+import { useBoolean } from 'ahooks';
+import { Layout } from 'antd';
+import type { RouterProps } from 'react-router';
+import MenuMain from './menu';
 const { Sider } = Layout;
 
 export default function Side(props: RouterProps) {

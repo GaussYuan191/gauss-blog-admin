@@ -1,11 +1,9 @@
-import './index.scss'
+import './index.scss';
 interface TittleProps {
-  title: string
+  title: string;
 }
-function HeaderTittle (props: TittleProps) {
-  return <div className="header-title">
-    {props.title}
-  </div>
+function HeaderTittle(props: TittleProps) {
+  return <div className="header-title">{props.title}</div>;
 }
 
-export default HeaderTittle
+export default HeaderTittle;

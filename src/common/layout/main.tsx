@@ -1,5 +1,5 @@
-import { Switch } from "react-router-dom";
-import { RouteWithSubRoutes } from "../../router";
+import { Switch } from 'react-router-dom';
+import { RouteWithSubRoutes } from '../../router';
 
 export default function Layout(props: any) {
   const state = {

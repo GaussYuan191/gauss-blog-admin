@@ -1,7 +1,7 @@
-import type { RouterProps } from "react-router";
-import Side from "./side";
-import Main from "./main";
-import "./layout.scss";
+import type { RouterProps } from 'react-router';
+import './layout.scss';
+import Main from './main';
+import Side from './side';
 
 export default function Layout(props: RouterProps) {
   return (

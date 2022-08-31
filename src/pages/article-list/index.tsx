@@ -1,16 +1,16 @@
-import type { RouteComponentProps } from "react-router";
-import { useState } from "react";
-import { useRequest, useMount } from "ahooks";
-import { Table, Divider, message } from "antd";
-import type { TablePaginationConfig } from "antd/es/table";
-import PageLayout from "../../common/components/page-layout";
+import { useMount, useRequest } from 'ahooks';
+import { Divider, message, Table } from 'antd';
+import type { TablePaginationConfig } from 'antd/es/table';
+import { useState } from 'react';
+import type { RouteComponentProps } from 'react-router';
+import PageLayout from '../../common/components/page-layout';
 
-import { columns } from "./article-config";
-import { getArts, delArt } from "../../utils";
-import "./index.scss";
+import { delArt, getArts } from '../../utils';
+import { columns } from './article-config';
+import './index.scss';
 
 type EditableTableProps = Parameters<typeof Table>[0];
-type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
+type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
 const ArticleList = (props: RouteComponentProps) => {
   const [list, setList] = useState([]);
@@ -21,7 +21,7 @@ const ArticleList = (props: RouteComponentProps) => {
   const pageList = (): Promise<any> => {
     return new Promise(async (resolve, reject) => {
       const { data } = await getArts();
-      console.log("data", data);
+      console.log('data', data);
       if (data.code && data.code == 1) resolve(data.result);
       else reject(data);
     });
@@ -57,7 +57,7 @@ const ArticleList = (props: RouteComponentProps) => {
     }
   }
   const tableColumns = columns.map((col) => {
-    if (col.dataIndex === "operation") {
+    if (col.dataIndex === 'operation') {
       return {
         ...col,
         onCell: (record: any) => ({ col, record, edit, del }),
@@ -89,14 +89,13 @@ const ArticleList = (props: RouteComponentProps) => {
 };
 function TCell(props: any) {
   const { children, col } = props;
-  const res: any =
-    col && col.dataIndex === "operation" ? <Operate {...props} /> : children;
+  const res: any = col && col.dataIndex === 'operation' ? <Operate {...props} /> : children;
   return <td>{res}</td>;
 }
 export function Operate(props: any) {
   const { edit, del, record } = props;
   const view = () => {
-    console.log("view");
+    console.log('view');
   };
   return (
     <div className="t_btn">

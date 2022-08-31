@@ -1,6 +1,6 @@
-import type { ChangeEvent } from "react";
-import { useEffect, useRef } from "react";
-import MarkdownIt from "markdown-it";
+import MarkdownIt from 'markdown-it';
+import type { ChangeEvent } from 'react';
+import { useEffect, useRef } from 'react';
 
 const md = new MarkdownIt();
 interface articleProps {
@@ -31,7 +31,7 @@ export default function Edit(props: articleProps) {
           defaultValue={props.content}
           placeholder="请输入文章内容，md格式"
           onChange={textareaChange}
-         />
+        />
       </div>
       <div className="rightbox box" ref={viewRef} />
     </section>

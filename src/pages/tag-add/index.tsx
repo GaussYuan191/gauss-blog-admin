@@ -1,5 +1,5 @@
-import PageLayout from "../../common/components/page-layout";
-import Tag from "./add";
+import PageLayout from '../../common/components/page-layout';
+import Tag from './add';
 const AddTag = (props: any) => {
   return (
     <>

@@ -1,16 +1,15 @@
-import { useLocalStorageState, useRequest, useMount } from "ahooks";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Card } from "antd";
-import type { CheckboxChangeEvent } from "antd/es/checkbox";
-import type { FormProps } from "antd/lib/form/Form";
-import type { RouterProps } from "react-router";
-import { login } from "../../utils";
-import { setToken } from "../../utils";
-import "./index.scss";
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { useLocalStorageState, useMount, useRequest } from 'ahooks';
+import { Button, Card, Checkbox, Form, Input } from 'antd';
+import type { CheckboxChangeEvent } from 'antd/es/checkbox';
+import type { FormProps } from 'antd/lib/form/Form';
+import type { RouterProps } from 'react-router';
+import { login, setToken } from '../../utils';
+import './index.scss';
 
 const LoginForm = (props: FormProps & RouterProps) => {
   /** 使用useLocalStorageState aHooks 保存用户勾选状态 */
-  const [remember, setRemember] = useLocalStorageState<boolean>("remember", {
+  const [remember, setRemember] = useLocalStorageState<boolean>('remember', {
     defaultValue: false,
   });
   /** 创建表单实例 */
@@ -28,7 +27,7 @@ const LoginForm = (props: FormProps & RouterProps) => {
     manual: true,
     onSuccess: (result: object) => {
       setToken(result);
-      props.history.push("/home");
+      props.history.push('/home');
     },
     onError: (error) => {
       console.log(error.message);
@@ -39,7 +38,7 @@ const LoginForm = (props: FormProps & RouterProps) => {
   const onFinish = (values: any) => {
     //用户勾选
     if (remember) {
-      window.localStorage.setItem("userInfo", JSON.stringify(values));
+      window.localStorage.setItem('userInfo', JSON.stringify(values));
     }
     run(values);
   };
@@ -50,9 +49,7 @@ const LoginForm = (props: FormProps & RouterProps) => {
   /** 组件挂载时 加载本地存储的用户信息 */
   useMount(() => {
     if (remember) {
-      const userInfo = JSON.parse(
-        window.localStorage.getItem("userInfo") || "{}"
-      );
+      const userInfo = JSON.parse(window.localStorage.getItem('userInfo') || '{}');
       form.setFieldsValue({ ...userInfo });
     }
   });
@@ -63,7 +60,7 @@ const LoginForm = (props: FormProps & RouterProps) => {
           className="login-card"
           hoverable
           title="博客管理系统后端"
-          headStyle={{ textAlign: "center", fontSize: 18 }}
+          headStyle={{ textAlign: 'center', fontSize: 18 }}
         >
           <Form
             form={form}
@@ -71,20 +68,14 @@ const LoginForm = (props: FormProps & RouterProps) => {
             initialValues={{ remember: remember }}
             onFinish={onFinish}
           >
-            <Form.Item
-              name="username"
-              rules={[{ required: true, message: "请输入用户名!" }]}
-            >
+            <Form.Item name="username" rules={[{ required: true, message: '请输入用户名!' }]}>
               <Input
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 allowClear
                 placeholder="用户名"
               />
             </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: "请输入密码!" }]}
-            >
+            <Form.Item name="password" rules={[{ required: true, message: '请输入密码!' }]}>
               <Input
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
@@ -98,11 +89,7 @@ const LoginForm = (props: FormProps & RouterProps) => {
               </Checkbox>
             </Form.Item>
             <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-              >
+              <Button type="primary" htmlType="submit" className="login-form-button">
                 登录
               </Button>
             </Form.Item>

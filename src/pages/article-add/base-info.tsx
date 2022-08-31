@@ -1,7 +1,7 @@
-import { Form, Input, Col, Select, Switch } from "antd";
-import type { FormProps } from "antd/es/form";
-import { PureComponent } from "react";
-import { fetchTag } from "../../utils";
+import { Col, Form, Input, Select, Switch } from 'antd';
+import type { FormProps } from 'antd/es/form';
+import { PureComponent } from 'react';
+import { fetchTag } from '../../utils';
 const { Option } = Select;
 
 interface InFormComponetProps<T> extends FormProps<T> {
@@ -51,9 +51,9 @@ class BaseInfo extends PureComponent<InFormComponetProps<any>> {
   }
   render() {
     const { allTags, article, tagIds } = this.state;
-    const title = article.title || "";
-    const descript = article.descript || "";
-    const keyword = article.keyword || "";
+    const title = article.title || '';
+    const descript = article.descript || '';
+    const keyword = article.keyword || '';
     return (
       <div className="baseInfo">
         <Form
@@ -64,46 +64,34 @@ class BaseInfo extends PureComponent<InFormComponetProps<any>> {
           onFinish={this.onFinish}
         >
           <Col span={10}>
-            <Form.Item
-              label="标题"
-              rules={[{ required: true, message: "请输入标题!" }]}
-            >
+            <Form.Item label="标题" rules={[{ required: true, message: '请输入标题!' }]}>
               <Input
                 placeholder="请输入标题"
                 value={title}
-                onChange={(e) => this.inputChange("title", e)}
+                onChange={(e) => this.inputChange('title', e)}
               />
             </Form.Item>
           </Col>
           <Col span={14}>
-            <Form.Item
-              label="描述"
-              rules={[{ required: true, message: "请输入标题!" }]}
-            >
+            <Form.Item label="描述" rules={[{ required: true, message: '请输入标题!' }]}>
               <Input
                 placeholder="请输入简短的描述"
                 value={descript}
-                onChange={(e) => this.inputChange("descript", e)}
+                onChange={(e) => this.inputChange('descript', e)}
               />
             </Form.Item>
           </Col>
           <Col span={10}>
-            <Form.Item
-              label="关键字"
-              rules={[{ required: true, message: "请输入标题!" }]}
-            >
+            <Form.Item label="关键字" rules={[{ required: true, message: '请输入标题!' }]}>
               <Input
                 placeholder="请输入关键字用，分割"
                 value={keyword}
-                onChange={(e) => this.inputChange("keyword", e)}
+                onChange={(e) => this.inputChange('keyword', e)}
               />
             </Form.Item>
           </Col>
           <Col span={14}>
-            <Form.Item
-              label="标签"
-              rules={[{ required: true, message: "请选择标签!" }]}
-            >
+            <Form.Item label="标签" rules={[{ required: true, message: '请选择标签!' }]}>
               <Select
                 mode="multiple"
                 placeholder="请选择标签"
@@ -119,32 +107,22 @@ class BaseInfo extends PureComponent<InFormComponetProps<any>> {
             </Form.Item>
           </Col>
           <Col span={10}>
-            <Form.Item
-              label="是否发布"
-              rules={[{ required: true, message: "是否现在要发布!" }]}
-            >
+            <Form.Item label="是否发布" rules={[{ required: true, message: '是否现在要发布!' }]}>
               <Switch
                 checkedChildren="发布"
                 unCheckedChildren="草稿"
                 checked={article.state === 1}
-                onChange={(checked: boolean) =>
-                  this.switchChange("state", checked)
-                }
+                onChange={(checked: boolean) => this.switchChange('state', checked)}
               />
             </Form.Item>
           </Col>
           <Col span={14}>
-            <Form.Item
-              label="是否公开"
-              rules={[{ required: true, message: "是否是公开文章!" }]}
-            >
+            <Form.Item label="是否公开" rules={[{ required: true, message: '是否是公开文章!' }]}>
               <Switch
                 checkedChildren="公开"
                 unCheckedChildren="私密"
                 checked={article.publish === 1}
-                onChange={(checked: boolean) =>
-                  this.switchChange("publish", checked)
-                }
+                onChange={(checked: boolean) => this.switchChange('publish', checked)}
               />
             </Form.Item>
           </Col>

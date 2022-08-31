@@ -1,15 +1,15 @@
 {
   "name": "gauss-blog-admin",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "dev": "vite",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
-    "lint:style": "stylelint --fix \"src/**/*.{css,scss,less}\" --cache"
+    "lint:style": "stylelint --fix \"src/**/*.{css,scss,less}\" --cache",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@loadable/component": "^5.15.2",

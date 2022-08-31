@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Table, Input } from "antd";
-import { columns } from "./article-config";
-import PageLayout from "../../common/components/page-layout";
-import { fetchTag, editeTag, delTag } from "../../utils/api";
-import { Operation } from "./oprations";
-import "./index.scss";
+import { Input, Table } from 'antd';
+import React, { useEffect, useState } from 'react';
+import PageLayout from '../../common/components/page-layout';
+import { delTag, editeTag, fetchTag } from '../../utils/api';
+import { columns } from './article-config';
+import './index.scss';
+import { Operation } from './oprations';
 
 const editPrams: any = {};
 
@@ -23,11 +23,7 @@ const EditCell = (props: any) => {
     );
   } else {
     res =
-      col && col.dataIndex === "operation" ? (
-        <Operation {...props} editing={editing} />
-      ) : (
-        children
-      );
+      col && col.dataIndex === 'operation' ? <Operation {...props} editing={editing} /> : children;
   }
   return <td>{res}</td>;
 };
@@ -81,7 +77,7 @@ const Tag = () => {
           editing: isEditing(rowIndex),
         }),
       };
-    } else if (col.dataIndex === "operation") {
+    } else if (col.dataIndex === 'operation') {
       return {
         ...col,
         onCell: (record: any, rowIndex: number) => ({

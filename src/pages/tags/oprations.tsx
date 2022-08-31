@@ -1,4 +1,4 @@
-import { Divider, Button } from "antd";
+import { Button, Divider } from 'antd';
 
 export const Operation = (props: any) => {
   const { editing, rowIndex, record } = props;
