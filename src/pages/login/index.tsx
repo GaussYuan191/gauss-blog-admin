@@ -2,8 +2,8 @@ import { useLocalStorageState, useRequest, useMount } from "ahooks";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Card } from "antd";
 import type { CheckboxChangeEvent } from "antd/es/checkbox";
-import { FormProps } from "antd/lib/form/Form";
-import { RouterProps } from "react-router";
+import type { FormProps } from "antd/lib/form/Form";
+import type { RouterProps } from "react-router";
 import { login } from "../../utils";
 import { setToken } from "../../utils";
 import "./index.scss";
@@ -18,7 +18,7 @@ const LoginForm = (props: FormProps & RouterProps) => {
   /** 封装登录接口 */
   const userLogin = (userInfo: object): Promise<object> => {
     return new Promise(async (resolve, reject) => {
-      let { data } = await login(userInfo);
+      const { data } = await login(userInfo);
       if (data.code && data.code == 1) resolve(data.result);
       else reject(data);
     });
@@ -50,7 +50,7 @@ const LoginForm = (props: FormProps & RouterProps) => {
   /** 组件挂载时 加载本地存储的用户信息 */
   useMount(() => {
     if (remember) {
-      let userInfo = JSON.parse(
+      const userInfo = JSON.parse(
         window.localStorage.getItem("userInfo") || "{}"
       );
       form.setFieldsValue({ ...userInfo });

@@ -1,5 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import { message, Modal } from "antd";
+import type { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
+import { Modal } from "antd";
 import { API_ROOT } from "./config";
 import { isLogin, getToken } from "./tools";
 const LOGIN_PATH = "user/login";
@@ -35,7 +36,7 @@ http.interceptors.response.use(
         },
       });
     }
-    let { data } = response;
+    const { data } = response;
     if (data.code == 0) {
       return Promise.reject(data.message);
     } else {

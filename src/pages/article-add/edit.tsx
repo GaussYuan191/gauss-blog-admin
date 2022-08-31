@@ -1,4 +1,5 @@
-import { useEffect, useRef, ChangeEvent } from "react";
+import type { ChangeEvent } from "react";
+import { useEffect, useRef } from "react";
 import MarkdownIt from "markdown-it";
 
 const md = new MarkdownIt();
@@ -9,8 +10,8 @@ interface articleProps {
 }
 
 export default function Edit(props: articleProps) {
-  let viewRef = useRef<HTMLDivElement>(null);
-  let textareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const viewRef = useRef<HTMLDivElement>(null);
+  const textareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (viewRef && viewRef.current) {
       const editStr = md.render(e.currentTarget.value);
       viewRef.current.innerHTML = editStr;
@@ -30,9 +31,9 @@ export default function Edit(props: articleProps) {
           defaultValue={props.content}
           placeholder="请输入文章内容，md格式"
           onChange={textareaChange}
-        ></textarea>
+         />
       </div>
-      <div className="rightbox box" ref={viewRef}></div>
+      <div className="rightbox box" ref={viewRef} />
     </section>
   );
 }

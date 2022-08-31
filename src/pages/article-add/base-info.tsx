@@ -1,6 +1,6 @@
 import { Form, Input, Col, Select, Switch } from "antd";
-import { FormProps } from "antd/es/form";
-import { FC, PureComponent } from "react";
+import type { FormProps } from "antd/es/form";
+import { PureComponent } from "react";
 import { fetchTag } from "../../utils";
 const { Option } = Select;
 

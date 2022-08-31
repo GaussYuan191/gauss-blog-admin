@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, { useEffect, useState, useRef } from "react";
 import { Button, message, Modal } from "antd";
-import { RouteComponentProps, useLocation } from "react-router-dom";
+import type { RouteComponentProps } from "react-router-dom";
 import PageLayout from "../../common/components/page-layout";
 import BaseInfo from "./base-info";
 import Edit from "./edit";
 import "./index.scss";
 import "./view-article.scss";
-import { addArticle, editeArt, getArtId, mdArt, useQuery } from "../../utils";
+import { addArticle, getArtId, mdArt, useQuery } from "../../utils";
 export default function AddArticle(props: RouteComponentProps) {
   let myform: any = null;
   const viewArticleDom = useRef<any>(null);
@@ -27,13 +28,8 @@ export default function AddArticle(props: RouteComponentProps) {
     });
     viewArticleDom.current.innerHTML = res.data.result.html;
   };
-  const getFormData = (article: any, tagIds: Array<string>) => {
-    if (acontent.content) {
-      add(article, tagIds);
-    }
-  };
-  const add = async (article: any, tagIds: Array<string>) => {
-    let params = { ...article, ...acontent };
+  const add = async (article: any, tagIds: string[]) => {
+    const params = { ...article, ...acontent };
     const { data } = await addArticle({
       title: params.title,
       keyword: params.keyword,
@@ -50,6 +46,12 @@ export default function AddArticle(props: RouteComponentProps) {
     }
     console.log("开始添加文章", params);
   };
+  const getFormData = (article: any, tagIds: string[]) => {
+    if (acontent.content) {
+      add(article, tagIds);
+    }
+  };
+  
   const saveFormRef = (formRef: any) => {
     myform = formRef;
   };
@@ -78,7 +80,7 @@ export default function AddArticle(props: RouteComponentProps) {
         setAcontent({ content: "", editContent: "" });
       }
     })();
-  }, [location]);
+  }, [query]);
   return (
     <PageLayout title={title}>
       <BaseInfo
@@ -122,7 +124,7 @@ export default function AddArticle(props: RouteComponentProps) {
           <div
             ref={viewArticleDom}
             className="theme-default-content content__default"
-          ></div>
+           />
         </div>
       </Modal>
     </PageLayout>

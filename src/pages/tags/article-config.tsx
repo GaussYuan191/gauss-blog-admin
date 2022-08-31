@@ -1,10 +1,10 @@
-import { ColumnProps } from "antd/es/table";
+import type { ColumnProps } from "antd/es/table";
 
 interface ColumnPropsEditTable<T> extends ColumnProps<T> {
   editable?: boolean;
 }
 
-export const columns:Array<ColumnPropsEditTable<any>> = [
+export const columns: ColumnPropsEditTable<any>[] = [
   {
     title: '#',
     width: 50,

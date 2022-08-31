@@ -1,8 +1,8 @@
-import { RouteComponentProps } from "react-router";
+import type { RouteComponentProps } from "react-router";
 import { useState } from "react";
 import { useRequest, useMount } from "ahooks";
 import { Table, Divider, message } from "antd";
-import { TablePaginationConfig } from "antd/es/table";
+import type { TablePaginationConfig } from "antd/es/table";
 import PageLayout from "../../common/components/page-layout";
 
 import { columns } from "./article-config";
@@ -20,7 +20,7 @@ const ArticleList = (props: RouteComponentProps) => {
 
   const pageList = (): Promise<any> => {
     return new Promise(async (resolve, reject) => {
-      let { data } = await getArts();
+      const { data } = await getArts();
       console.log("data", data);
       if (data.code && data.code == 1) resolve(data.result);
       else reject(data);
@@ -29,6 +29,7 @@ const ArticleList = (props: RouteComponentProps) => {
   const { run } = useRequest(pageList, {
     manual: true,
     onSuccess: (data: any) => {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       const { list, pagination } = data;
       setList(list || []);
       setPage({ current: pagination.current_page, total: pagination.total });
@@ -88,7 +89,7 @@ const ArticleList = (props: RouteComponentProps) => {
 };
 function TCell(props: any) {
   const { children, col } = props;
-  let res: any =
+  const res: any =
     col && col.dataIndex === "operation" ? <Operate {...props} /> : children;
   return <td>{res}</td>;
 }

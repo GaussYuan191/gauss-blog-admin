@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 
 /** 判断是否已经登录 或者token 超时 */
 export const isLogin = (): boolean => {
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const localToken = getToken();
   if (localToken) {
     const lifeTime =
@@ -15,7 +16,7 @@ export const isLogin = (): boolean => {
 
 /** 获取本地token */
 export const getToken = (): string => {
-  let tokenInfo = JSON.parse(window.localStorage.getItem("token") || "{}");
+  const tokenInfo = JSON.parse(window.localStorage.getItem("token") || "{}");
   return tokenInfo?.token || "";
 };
 /** 设置本地token */
