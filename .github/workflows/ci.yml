@@ -40,18 +40,18 @@ jobs:
         run: yarn install
       # 运行代码扫描
       - name: Running Lint
-      # 通过前面章节定义的命令行执行代码扫描
+        # 通过前面章节定义的命令行执行代码扫描
         run: yarn lint
       # 项目打包
       - name: Run build task
         run: yarn build
-      # 项目部署  
+      # 项目部署
       - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@main
-      env:
+        uses: easingthemes/ssh-deploy@main
+        env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "dist/"
+          ARGS: '-rltgoDzvO --delete'
+          SOURCE: 'dist/'
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          EXCLUDE: "/dist/, /node_modules/"
+          EXCLUDE: '/dist/, /node_modules/'

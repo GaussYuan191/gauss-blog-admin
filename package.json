@@ -9,6 +9,7 @@
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.{css,scss,less}\" --cache",
+    "prettier": "prettier --write .",
     "preview": "vite preview"
   },
   "dependencies": {
