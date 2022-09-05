@@ -78,7 +78,7 @@ jobs:
           # 给清单打上多个标签
           tags: ${{ secrets.IMAGE_TOTAL_NAME }}:${{ secrets.IMAGE_TAG }}
       # 项目部署
-      - name: executing remote ssh commands using password
+      - name: Docker pull and Deploy to Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.REMOTE_HOST }}
@@ -93,13 +93,3 @@ jobs:
               --name ${{ secrets.SERVICE_CONTAINER_NAME }} \
               -p ${{ secrets.EXPOSED_PORT }}:${{ secrets.EXPOSED_PORT }} \
               ${{ secrets.IMAGE_TOTAL_NAME }}:${{ secrets.IMAGE_TAG }}
-      # # 项目部署
-      # - name: Deploy to Server
-      #   uses: easingthemes/ssh-deploy@main
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-      #     ARGS: '-rltgoDzvO --delete'
-      #     SOURCE: './dist/'
-      #     REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-      #     REMOTE_USER: ${{ secrets.REMOTE_USER }}
-      #     EXCLUDE: './dist/, ./node_modules/'
