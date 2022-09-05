@@ -4,13 +4,20 @@
   "private": true,
   "scripts": {
     "build": "vite build",
+    "build:docker": "vite build && docker build —tag yuangauss/blog-main:latest .",
     "dev": "vite",
     "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
     "lint:prettier": "prettier --check \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.{css,scss,less}\" --cache",
+    "prepare": "husky install",
     "prettier": "prettier --write .",
     "preview": "vite preview"
+  },
+  "lint-staged": {
+    "*.{js,jsx,tsx,ts}": [
+      "npm run lint"
+    ]
   },
   "dependencies": {
     "@loadable/component": "^5.15.2",
@@ -20,18 +27,22 @@
     "@umijs/fabric": "^3.0.0",
     "ahooks": "^3.4.1",
     "antd": "^4.21.1",
-    "axios": "0.21.1",
+    "axios": "^0.21.1",
     "echarts": "^5.3.3",
-    "markdown-it": "12.0.4",
+    "markdown-it": "^12.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "5.2.0",
     "sass": "^1.52.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "typescript": "^4.5.4",
     "vite": "^2.8.0"
   }
