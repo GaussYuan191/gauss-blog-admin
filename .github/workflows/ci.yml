@@ -49,17 +49,17 @@ jobs:
       - name: Get current date
         id: date
         run: echo "::set-output name=today::$(date +'%Y-%m-%d_%H-%M')"
-
+      # 设置QEMU运行环境
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-
+      # 开始构建
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
-
+      # 设置平台
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
-
+      # 登录DockerHub
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
@@ -76,9 +76,23 @@ jobs:
           # 镜像推送时间
           push: ${{ github.event_name != 'pull_request' }}
           # 给清单打上多个标签
-          tags: |
-            yuangauss/blog-main:${{ steps.date.outputs.today }}
-            yuangauss/blog-main:latest
+          tags: ${{ secrets.IMAGE_TOTAL_NAME }}:${{ secrets.IMAGE_TAG }}
+      # 项目部署
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME}} -p ${{ secrets.DOCKERHUB_TOKEN }} ${{ secrets.DOCKERHUB_REGISTRY }}
+            docker pull ${{ secrets.IMAGE_TOTAL_NAME }}:${{ secrets.IMAGE_TAG }}
+            docker stop ${{ secrets.SERVICE_CONTAINER_NAME}}
+            docker rm ${{ secrets.SERVICE_CONTAINER_NAME }}
+            docker run -d \
+              --name ${{ secrets.SERVICE_CONTAINER_NAME }} \
+              -p ${{ secrets.EXPOSED_PORT }}:${{ secrets.EXPOSED_PORT }} \
+              ${{ secrets.IMAGE_TOTAL_NAME }}:${{ secrets.IMAGE_TAG }}
       # # 项目部署
       # - name: Deploy to Server
       #   uses: easingthemes/ssh-deploy@main
