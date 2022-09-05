@@ -2,6 +2,7 @@
 import { Button, message, Modal } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import type { RouteComponentProps } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import PageLayout from '../../common/components/page-layout';
 import { addArticle, getArtId, mdArt, useQuery } from '../../utils';
 import BaseInfo from './base-info';
@@ -17,7 +18,7 @@ export default function AddArticle(props: RouteComponentProps) {
   const [title, setTitle] = useState('');
   const [visible, setVisible] = useState(false); // 文章预览
   const query = useQuery();
-
+  const location = useLocation();
   const submit = () => {
     myform.submit();
   };
@@ -80,7 +81,8 @@ export default function AddArticle(props: RouteComponentProps) {
         setAcontent({ content: '', editContent: '' });
       }
     })();
-  }, [query]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
   return (
     <PageLayout title={title}>
       <BaseInfo submit={getFormData} wrappedComponentRef={saveFormRef} article={article} />
