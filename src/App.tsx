@@ -1,5 +1,6 @@
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { routes, RouteWithSubRoutes } from './router';
+// 主应用
 function App() {
   return (
     <BrowserRouter>
