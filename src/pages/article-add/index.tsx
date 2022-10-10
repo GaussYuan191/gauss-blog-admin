@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { RouteComponentProps } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import PageLayout from '../../common/components/page-layout';
-import { addArticle, getArtId, mdArt, useQuery } from '../../utils';
+import { addArticle, editeArt, getArtId, mdArt, useQuery } from '../../utils';
 import BaseInfo from './base-info';
 import Edit from './edit';
 import './index.scss';
@@ -49,10 +49,32 @@ export default function AddArticle(props: RouteComponentProps) {
   };
   const getFormData = (article: any, tagIds: string[]) => {
     if (acontent.content) {
-      add(article, tagIds);
+      const id = query.get('id');
+      if (id) {
+        edit(article, id, tagIds);
+      } else {
+        add(article, tagIds);
+      }
     }
   };
+  async function edit(values: any, id: string, tagIds: string[]) {
+    const params = { ...values, ...acontent };
 
+    const { data } = await editeArt(id, {
+      title: params.title,
+      keyword: params.keyword,
+      descript: params.descript,
+      tag: tagIds,
+      content: params.content,
+      editContent: params.editContent,
+      state: params.state,
+      publish: params.publish,
+    });
+    if (data.code) {
+      message.success(data.message);
+      props.history.push('/article');
+    }
+  }
   const saveFormRef = (formRef: any) => {
     myform = formRef;
   };

@@ -1,16 +1,17 @@
 import { Col, Form, Input, Select, Switch } from 'antd';
-import type { FormProps } from 'antd/es/form';
-import { PureComponent } from 'react';
-import { fetchTag } from '../../utils';
+import { FormProps } from 'antd/es/form';
+import React from 'react';
+import { fetchTag } from '../../utils/api';
 const { Option } = Select;
 
-interface InFormComponetProps<T> extends FormProps<T> {
+interface IFormComponentProps<T> extends FormProps<T> {
   article: any;
   wrappedComponentRef: any;
   submit: any;
 }
 
-class BaseInfo extends PureComponent<InFormComponetProps<any>> {
+// 必须是class 形式才能通过 wrappedComponentRef 拿到实例
+class BaseInfo extends React.Component<IFormComponentProps<any>> {
   constructor(props: any) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -26,6 +27,16 @@ class BaseInfo extends PureComponent<InFormComponetProps<any>> {
     this.setState({
       allTags: data.result.list || [],
     });
+  }
+  UNSAFE_componentWillReceiveProps(nextProps: any) {
+    const article = nextProps.article;
+    if (article._id) {
+      const tagIds = article.tag ? article.tag.map((item: any) => item._id) : [];
+      this.setState({
+        article: nextProps.article,
+        tagIds,
+      });
+    }
   }
   handleChange(value: any) {
     this.setState({ tagIds: value });
@@ -131,4 +142,5 @@ class BaseInfo extends PureComponent<InFormComponetProps<any>> {
     );
   }
 }
+
 export default BaseInfo;
