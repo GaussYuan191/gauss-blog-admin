@@ -3,7 +3,6 @@ import {
   HomeOutlined,
   IssuesCloseOutlined,
   MessageOutlined,
-  PlayCircleOutlined,
   ProjectOutlined,
   TagsOutlined,
 } from '@ant-design/icons';
@@ -109,23 +108,6 @@ export const menuConfig: menuType[] = [
         title: '新增项目',
         key: 'project-add',
         path: '/project-add',
-      },
-    ],
-  },
-  {
-    title: '音乐管理',
-    key: 'music',
-    icon: PlayCircleOutlined,
-    children: [
-      {
-        title: '音乐列表',
-        key: 'music-list',
-        path: '/music',
-      },
-      {
-        title: '新增音乐',
-        key: 'music-add',
-        path: '/music-add',
       },
     ],
   },
