@@ -2,6 +2,7 @@
   "name": "gauss-blog-admin",
   "version": "0.0.0",
   "private": true,
+  "homepage": "http://GaussYuan191.github.io/gauss-blog-admin",
   "scripts": {
     "build": "vite build",
     "build:docker": "vite build && docker build —t yuangauss/blog-main:latest .",
