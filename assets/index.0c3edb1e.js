@@ -1,0 +1,1 @@
+import{r}from"./index.1e18674b.js";var u=function(t){return function(f,n){var e=r.exports.useRef(!1);t(function(){return function(){e.current=!1}},[]),t(function(){if(!e.current)e.current=!0;else return f()},n)}},s=u(r.exports.useEffect);export{s as u};

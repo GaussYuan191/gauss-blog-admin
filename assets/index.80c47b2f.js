@@ -1,0 +1,1 @@
+import{P as r}from"./page-layout.ad34ff44.js";import{j as u}from"./index.1e18674b.js";import"./index.d09e3fac.js";function a(){return u(r,{title:"\u65B0\u589E\u7559\u8A00",children:u("h1",{children:"\u65B0\u589E\u7559\u8A00(TODO)"})})}export{a as default};

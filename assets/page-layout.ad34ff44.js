@@ -1,0 +1,1 @@
+import{H as e}from"./index.d09e3fac.js";import{a as r,F as s,j as a}from"./index.1e18674b.js";const i=t=>r(s,{children:[a(e,{title:t.title}),a("div",{className:"content",children:t.children})]});var l=i;export{l as P};
